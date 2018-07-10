@@ -8,3 +8,4 @@
 
 # lin = User.create(name: "Maneepailin Sriuthenchai")
 # daniel = User.create(name: "Daniel Rein")
+
