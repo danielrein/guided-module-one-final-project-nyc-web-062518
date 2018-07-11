@@ -12,7 +12,7 @@ def get_data
     uri = "https://app.ticketmaster.com" + parsed_data["_links"]["next"]["href"] + "&apikey=Jx5LTUJQVff8r3cmh2vUuABLGHjW8Nar"
     sleep(1)
   end
-  array_of_arrays.flatten[0]
+  array_of_arrays.flatten
 end
 
 def events_array(parsed_data)

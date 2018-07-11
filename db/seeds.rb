@@ -1,3 +1,15 @@
+def event_create
+    get_data.each do |hash|
+        Event.create(name: hash[:name], location: hash[:location], event_type: hash[:genre])
+    end
+end
+
+
+
+
+
+
+
 # cafe_plaza_deli = Restaurant.create(name: "Cafe Plaza Deli", location: "10004", food_type: "deli")
 # broccolino = Restaurant.create(name: "Broccolino", location: "11238", food_type: "italian")
 # white_castle = Restaurant.create(name: "White Castle", location: "11373", food_type: "burgers")
