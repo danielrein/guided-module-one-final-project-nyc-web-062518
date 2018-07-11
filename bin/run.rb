@@ -26,7 +26,10 @@ end
 
 def show_available_event_types(zipcode, date)
     puts "These are the event types available in #{zipcode} on #{date}:"
-    available_event_types = Event.all.map { |event| event[:event_type] }.uniq
+    available_events = Event.where({zipcode: zipcode, date: date})
+    available_event_types = available_events.map { |event| event[:event_type] }.uniq
+    # available_event_types = Event.all.map { |event| event[:event_type] }.uniq
+
     available_event_types.each { |type| puts type }
 end
 
