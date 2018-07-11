@@ -6,13 +6,13 @@ def greet
 end
 
 def get_user_name
-    puts 'Please type in your name:'
+    puts 'Please type in your first name:'
     gets.chomp.downcase
 end
 
 def save_user_if_new(name)
-    if User.find_by name: name
-        puts "Welcome back, #{name}!"
+    if User.find_by name: name.capitalize
+        puts "Welcome back, #{name.capitalize}!"
     else
         User.create(name: name.capitalize)
     end
