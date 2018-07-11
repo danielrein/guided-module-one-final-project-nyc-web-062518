@@ -1,10 +1,11 @@
 require_relative '../config/environment'
+require 'pry'
 
 def greet
     puts 'Welcome to DinnerAndWhatElse..?'
 end
 
-def get_user
+def get_user_name
     puts 'Please type in your name:'
     gets.chomp.downcase
 end
@@ -22,3 +23,34 @@ def get_date
     puts 'Please type in a date in this format: yyyy-mm-dd'
     Date.parse(gets.chomp)
 end
+
+def show_available_event_types(zipcode, date)
+    puts "These are the event types available in #{zipcode} on #{date}:"
+    available_event_types = Event.all.map { |event| event[:event_type] }.uniq
+    available_event_types.each { |type| puts type }
+end
+
+def get_event_type
+    puts 'Please enter desired event type'
+    gets.chomp
+end
+
+def show_matching_events(zipcode, date, event_type)
+    matching_events = Event.where location: zipcode, date_time: date, event_type: event_type
+    puts "Available events:"
+    matching_events.each { |event| puts event.name }
+    binding.pry
+end
+
+def run
+    greet
+    name = get_user_name
+    save_user(name)
+    zipcode = get_location
+    date = get_date
+    show_available_event_types(zipcode, date)
+    event_type = get_event_type
+    show_matching_events(zipcode, date, event_type)
+end
+
+run
