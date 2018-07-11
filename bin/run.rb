@@ -10,8 +10,12 @@ def get_user_name
     gets.chomp.downcase
 end
 
-def save_user(name)
-    User.create(name: name.capitalize)
+def save_user_if_new(name)
+    if User.find_by name: name
+        puts "Welcome back, #{name}!"
+    else
+        User.create(name: name.capitalize)
+    end
 end
 
 def get_zipcode
@@ -47,7 +51,7 @@ end
 def run
     greet
     name = get_user_name
-    save_user(name)
+    save_user_if_new(name)
     zipcode = get_zipcode
     date = get_date
     show_available_event_types(zipcode, date)
