@@ -26,5 +26,5 @@ def events_array(parsed_data)
     end
 end
 
-    binding.pry
-    false
+    # binding.pry
+    # false
