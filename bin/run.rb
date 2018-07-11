@@ -1,5 +1,5 @@
 require_relative '../config/environment'
-require 'pry'
+# require 'pry'
 
 def greet
     puts 'Welcome to DinnerAndWhatElse..?'
@@ -14,7 +14,7 @@ def save_user(name)
     User.create(name: name.capitalize)
 end
 
-def get_location
+def get_zipcode
     puts 'Please type in a zipcode'
     gets.chomp
 end
@@ -36,17 +36,16 @@ def get_event_type
 end
 
 def show_matching_events(zipcode, date, event_type)
-    matching_events = Event.where location: zipcode, date_time: date, event_type: event_type
+    matching_events = Event.where zipcode: zipcode, date: date, event_type: event_type
     puts "Available events:"
     matching_events.each { |event| puts event.name }
-    binding.pry
 end
 
 def run
     greet
     name = get_user_name
     save_user(name)
-    zipcode = get_location
+    zipcode = get_zipcode
     date = get_date
     show_available_event_types(zipcode, date)
     event_type = get_event_type

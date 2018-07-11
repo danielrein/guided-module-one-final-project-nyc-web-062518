@@ -4,11 +4,11 @@ require_relative 'data.rb'
 
 def generate_events
     get_data.map do |hash|
-        Event.create(name: hash[:name], location: hash[:location], event_type: hash[:genre], date_time: hash[:dateTime])
+        Event.create(name: hash[:name], zipcode: hash[:location], event_type: hash[:genre], date: hash[:localDate])
     end
 end
 
-
+generate_events
 
 
 

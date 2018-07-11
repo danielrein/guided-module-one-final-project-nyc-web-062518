@@ -21,7 +21,7 @@ def events_array(parsed_data)
         name: event["name"],
         location: event["_embedded"]["venues"][0]["postalCode"],
         genre: event["classifications"][0]["genre"]["name"],
-        dateTime: event["dates"]["start"]["dateTime"]
+        localDate: event["dates"]["start"]["localDate"]
                 }
     end
 end
