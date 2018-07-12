@@ -49,21 +49,26 @@ def show_matching_events(zipcode, date)
     matching_events.each { |event| puts "event: #{event.name}, location: #{event.zipcode}" }
 end
 
-def show_matching_restaurants(zipcode)
+def matching_restaurants(zipcode)
     restaurants = search("restaurant", zipcode)
     restaurants_array = restaurants["businesses"].map do |restaurant|
             {
             name: restaurant["name"],
-            food_types: restaurant["categories"].map { |category| category["title"]}.join(', '),
+            food_type: restaurant["categories"][0]["title"]
+            food_types_display: restaurant["categories"].map { |category| category["title"]}.join(', '),
             rating: restaurant["rating"],
             address: restaurant["location"]["display_address"].join('\n')
-            }   
+            zipcode: restaurant["location"]["zip_code"]
+            }
     end
+    restaurants_array
+end
 
+def show_matching_restaurants(restaurants_array)
     puts "These are the restaurants in the area:"
     restaurants_array.each do |restaurant|
         puts "Name: #{restaurant[:name]}"
-        puts "Food types: #{restaurant[:food_types]}"
+        puts "Food types: #{restaurant[:food_types_display]}"
         puts "Rating: #{restaurant[:rating]}"
         puts "Address: #{restaurant[:address]}"
     end
@@ -72,6 +77,30 @@ def show_matching_restaurants(zipcode)
     # food_type_array = restaurants["businesses"][0]["categories"][0].map { |category| category["title"]}
     # rating = restaurants["businesses"][0]["rating"]
     # address = restaurants["businesses"][0]["location"]["display_address"].join('\n')
+end
+
+def selected_event
+  puts "Enter selected event name:"
+  gets.chomp
+end
+
+def selected_restaurant
+  puts "Enter selected restaurant name:"
+  gets.chomp
+end
+
+def create_selected_restaurant(name, restaurants_array)
+  if restaurants_array.any? {|r| r[:name].downcase == name.downcase}
+    Restaurant.create(name: restaurants_array[:name], location: restaurants_array[:zipcode], food_type: restaurants_array[:food_type])
+  else
+    puts "Invalid choice"
+    selected_restaurant
+  end
+end
+
+def show_user_programs(user)
+  puts "Here are the programs of #{user.name}:"
+  puts user.programs
 end
 
 def run
@@ -83,7 +112,13 @@ def run
     # show_available_event_types(zipcode, date)
     # event_type = get_event_type
     show_matching_events(zipcode, date)
-    show_matching_restaurants(zipcode)
+    restaurants_array = matching_restaurants(zipcode)
+    show_matching_restaurants(restaurants_array)
+    event = selected_event
+    restaurant_name = selected_restaurant
+    create_selected_restaurant(restaurant_name, restaurants_array)
+    Program.new().......
+    show_user_programs(..........)
 end
 
 run
