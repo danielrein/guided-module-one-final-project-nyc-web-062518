@@ -4,6 +4,7 @@ require "optparse"
 require "pry"
 
 API_KEY = 'dSpOzosE_0tn0aKFycd0FLI230-Xve3W-jZxcpmfCnG7mPxC_-pPUWxj6V0PTHSar0ihkK3UFIdNyew3u_bUPr62UWPWuFpxl7jB2QmtX_V_6SriBkcJTBuFPcpGW3Yx'
+
 API_HOST = "https://api.yelp.com"
 SEARCH_PATH = "/v3/businesses/search"
 BUSINESS_PATH = "/v3/businesses/"  
