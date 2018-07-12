@@ -1,6 +1,6 @@
 require_relative '../config/environment'
 require_relative '../db/yelp_data.rb'
-# require 'pry'
+require 'pry'
 
 def greet
     puts 'Welcome to DinnerAndWhatElse..?'
@@ -8,14 +8,14 @@ end
 
 def get_user_name
     puts 'Please type in your first name:'
-    gets.chomp.downcase
+    gets.chomp
 end
 
 def save_user_if_new(name)
-    if User.find_by name: name.capitalize
-        puts "Welcome back, #{name.capitalize}!"
+    if User.find_by name: name
+        puts "Welcome back, #{name}!"
     else
-        User.create(name: name.capitalize)
+        User.create(name: name)
     end
 end
 
@@ -54,10 +54,10 @@ def matching_restaurants(zipcode)
     restaurants_array = restaurants["businesses"].map do |restaurant|
             {
             name: restaurant["name"],
-            food_type: restaurant["categories"][0]["title"]
+            food_type: restaurant["categories"][0]["title"],
             food_types_display: restaurant["categories"].map { |category| category["title"]}.join(', '),
             rating: restaurant["rating"],
-            address: restaurant["location"]["display_address"].join('\n')
+            address: restaurant["location"]["display_address"].join('\n'),
             zipcode: restaurant["location"]["zip_code"]
             }
     end
@@ -91,7 +91,8 @@ end
 
 def create_selected_restaurant(name, restaurants_array)
   if restaurants_array.any? {|r| r[:name].downcase == name.downcase}
-    Restaurant.create(name: restaurants_array[:name], location: restaurants_array[:zipcode], food_type: restaurants_array[:food_type])
+    restaurant = restaurants_array.detect { |r| r[:name].downcase == name.downcase }
+    Restaurant.create(name: restaurant[:name], location: restaurant[:zipcode], food_type: restaurant[:food_type])
   else
     puts "Invalid choice"
     selected_restaurant
@@ -100,13 +101,14 @@ end
 
 def show_user_programs(user)
   puts "Here are the programs of #{user.name}:"
-  puts user.programs
+  puts user.programs.name
 end
 
 def run
     greet
     name = get_user_name
     save_user_if_new(name)
+    current_user = User.find_by name: name
     zipcode = get_zipcode
     date = get_date
     # show_available_event_types(zipcode, date)
@@ -117,8 +119,11 @@ def run
     event = selected_event
     restaurant_name = selected_restaurant
     create_selected_restaurant(restaurant_name, restaurants_array)
-    Program.new().......
-    show_user_programs(..........)
+    
+    binding.pry
+
+    Program.create(user_id: current_user.id, event_id: (Event.find_by name: event).id, restaurant_id: Restaurant.last.id)
+    show_user_programs(current_user)
 end
 
 run

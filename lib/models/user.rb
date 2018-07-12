@@ -8,6 +8,6 @@ class User < ActiveRecord::Base
     has_many :restaurants, through: :programs
 
     def programs
-      Program.all.find_by user_id: self.id
+      Program.all.select { |program| program.user_id == self.id }
     end
 end
