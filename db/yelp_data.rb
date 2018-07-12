@@ -1,7 +1,7 @@
 require "json"
 require "http"
 require "optparse"
-require "pry"
+# require "pry"
 
 API_KEY = 'dSpOzosE_0tn0aKFycd0FLI230-Xve3W-jZxcpmfCnG7mPxC_-pPUWxj6V0PTHSar0ihkK3UFIdNyew3u_bUPr62UWPWuFpxl7jB2QmtX_V_6SriBkcJTBuFPcpGW3Yx'
 
@@ -12,7 +12,7 @@ BUSINESS_PATH = "/v3/businesses/"
 DEFAULT_BUSINESS_ID = "yelp-san-francisco"
 DEFAULT_TERM = "dinner"
 DEFAULT_LOCATION = "San Francisco, CA"
-SEARCH_LIMIT = 5
+SEARCH_LIMIT = 50
 
 def search(term, location)
     url = "#{API_HOST}#{SEARCH_PATH}"
@@ -26,5 +26,5 @@ def search(term, location)
     response.parse
   end
 
-  binding.pry
-  false
+  # binding.pry
+  # false
