@@ -12,7 +12,7 @@ BUSINESS_PATH = "/v3/businesses/"
 DEFAULT_BUSINESS_ID = "yelp-san-francisco"
 DEFAULT_TERM = "dinner"
 DEFAULT_LOCATION = "San Francisco, CA"
-SEARCH_LIMIT = 50
+SEARCH_LIMIT = 5
 
 def search(term, location)
     url = "#{API_HOST}#{SEARCH_PATH}"
