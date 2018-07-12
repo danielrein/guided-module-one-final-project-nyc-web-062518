@@ -1,6 +1,6 @@
 require_relative '../config/environment'
 require_relative '../db/yelp_data.rb'
-require 'pry'
+# require 'pry'
 
 def greet
     puts 'Welcome to DinnerAndWhatElse..?'
@@ -100,8 +100,10 @@ def create_selected_restaurant(name, restaurants_array)
 end
 
 def show_user_programs(user)
-  puts "Here are the programs of #{user.name}:"
-  puts user.programs.name
+  puts "Here are your selections, #{user.name}:"
+  user.programs.each do |program|
+    puts "Start with dinner at... #{program.restaurant.name}   ...and then enjoy...   #{program.event.name}"
+  end
 end
 
 def run
@@ -119,9 +121,6 @@ def run
     event = selected_event
     restaurant_name = selected_restaurant
     create_selected_restaurant(restaurant_name, restaurants_array)
-    
-    binding.pry
-
     Program.create(user_id: current_user.id, event_id: (Event.find_by name: event).id, restaurant_id: Restaurant.last.id)
     show_user_programs(current_user)
 end
