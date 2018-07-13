@@ -14,12 +14,6 @@ JSON.parse(ticketmaster_data)["_embedded"]
     "id"=>"vvG1iZ4kyNVsor",
     "test"=>false,
     "url"=>
-     "https://www.ticketmaster.com/jayz-and-beyonce-otr-ii-pasadena-california-0=> {"events"=>
-  [{"name"=>"JAY-Z and BEYONCÉ - OTR II",
-    "type"=>"event",
-    "id"=>"vvG1iZ4kyNVsor",
-    "test"=>false,
-    "url"=>
      "https://www.ticketmaster.com/jayz-and-beyonce-otr-ii-pasadena-california-0
 9-23-2018/event/0B00546E63D3145E",
     "locale"=>"en-us",
@@ -86,3 +80,29 @@ JSON.parse(ticketmaster_data)["_embedded"]["events"].map do |event|
     puts event["classifications"][0]["genre"]["name"] 
     puts event["dates"]["start"]["dateTime"] 
     end
+
+
+
+    ## UNUSED CODE FROM run.rb
+
+
+    # def show_available_event_types(zipcode, date)
+#     puts "These are the event types available in #{zipcode} on #{date}:"
+#     available_events = Event.where({zipcode: zipcode, date: date})
+#     available_event_types = available_events.map { |event| event[:event_type] }.uniq
+#     # available_event_types = Event.all.map { |event| event[:event_type] }.uniq
+
+#     available_event_types.each { |type| puts type }
+# end
+
+# def get_event_type
+#     puts 'Please enter desired event type'
+#     gets.chomp
+# end
+
+
+
+    # name = restaurants["businesses"][0]["name"]
+    # food_type_array = restaurants["businesses"][0]["categories"][0].map { |category| category["title"]}
+    # rating = restaurants["businesses"][0]["rating"]
+    # address = restaurants["businesses"][0]["location"]["display_address"].join('\n')
