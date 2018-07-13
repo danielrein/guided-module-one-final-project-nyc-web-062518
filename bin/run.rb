@@ -34,7 +34,7 @@ def get_zipcode
 end
 
 def get_date
-    puts 'type in date (yyyy-mm-dd):'
+    puts 'Type in date (yyyy-mm-dd):'
     Date.parse(gets.chomp)
 end
 
@@ -77,12 +77,12 @@ def show_matching_restaurants(restaurants_array)
 end
 
 def get_event_selection
-  puts "\n\nEnter selected event name:\n"
+  puts "\n\nEnter selected event name:"
   gets.chomp
 end
 
 def get_restaurant_selection
-  puts "\n\nEnter selected restaurant name:\n"
+  puts "\n\nEnter selected restaurant name:"
   gets.chomp
 end
 
@@ -104,11 +104,22 @@ def shuffle_event(matching_events)
 end
 
 def show_and_confirm_random(user, restaurant, event)
-  puts restaurant
-  puts event
+  sleep(0.1)
+
+  puts "\n\n\n******** Here's the restaurant we picked out for you: ********\n\n"
+  sleep(0.5)
+  puts "NAME: #{restaurant[:name]}"
+  puts "FOOD TYPE: #{restaurant[:food_types_display]}"
+  puts "RATING: #{restaurant[:rating]}"
+  puts "ADDRESS: #{restaurant[:address]}"
+  sleep(1)
+  puts "\n\n******** And the event will be: ********\n\n"
+  sleep(0.5)
+  puts "EVENT: #{event.name}\nLOCATION: #{event.zipcode}"
+  sleep(0.5)
   input = ""
   while input != "y" && input != "n"
-    puts "Keep program?"
+    puts "\n\nSave program?"
     input = gets.chomp.downcase
   end
   if input == "y"
@@ -144,6 +155,15 @@ def y_or_n?(question)
   end
 end
 
+def p_or_s?(question)
+  input = ""
+  while input != "p" && input != "s"
+    puts question
+    input = gets.chomp.downcase
+  end
+  input
+end
+
 def run
 
     # welcome, create/find user, get zipcode, get date
@@ -168,28 +188,36 @@ def run
     matching_events = find_matching_events(zipcode ,date)
     show_matching_events(matching_events)
 
+    sleep(0.5)
+
+    pick_or_shuffle = p_or_s?("\n\nEnter 'P' to pick restaurant & event, or 'S' to shuffle")
+    if pick_or_shuffle == "p"
     # user's selection: get event/restaurant selection, create program and save to db
-    # puts ''
-    # event = get_event_selection
-    # restaurant_name = get_restaurant_selection
-    # create_selected_restaurant(restaurant_name, restaurants_array)
-    # Program.create(user_id: current_user.id, event_id: (Event.find_by name: event).id, restaurant_id: Restaurant.last.id)
-    # sleep(2)
+      puts ''
+      event = get_event_selection
+      restaurant_name = get_restaurant_selection
+      create_selected_restaurant(restaurant_name, restaurants_array)
+      Program.create(user_id: current_user.id, event_id: (Event.find_by name: event).id, restaurant_id: Restaurant.last.id)
+      puts "\nSaved!"
+      sleep(2)
+    else
 
     # shuffle: randomize event/restaurant selection, create program and save to db
-    choice = y_or_n?("Shuffle?")
+      sleep(1)
+      shuffle = true
 
-
-    while choice == true
-      restaurant = shuffle_restaurant(restaurants_array)
-      event = shuffle_event(matching_events)
-      x = show_and_confirm_random(current_user, restaurant, event)
-      if x
-        restaurant_new = Restaurant.create(name: restaurant[:name], location: restaurant[:zipcode], food_type: restaurant[:food_type])
-        save_program(current_user, restaurant_new, event)
-        puts "Saved!"
+      while shuffle == true
+        restaurant = shuffle_restaurant(restaurants_array)
+        event = shuffle_event(matching_events)
+        x = show_and_confirm_random(current_user, restaurant, event)
+        if x
+          restaurant_new = Restaurant.create(name: restaurant[:name], location: restaurant[:zipcode], food_type: restaurant[:food_type])
+          save_program(current_user, restaurant_new, event)
+          puts "\nSaved!"
+        end
+        sleep(0.5)
+        shuffle = y_or_n?("\n\nShuffle again?\n")
       end
-      choice = y_or_n?("Shuffle again?")
     end
 
     # display user's programs
