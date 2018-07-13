@@ -1,3 +1,28 @@
+# Dinner &...?
+
+A very simple CLI app for pairing events and restaurants in a specific location/date into a "program for the evening", utilizing the Ticketmaster and Yelp APIs.
+
+developers: Maneepailin Sriuthenchai & Daniel Rein
+
+demo video: https://www.youtube.com/watch?v=-xxSwFGa84Q&feature=youtu.be
+
+### installation
+* clone this folder
+* bundle install
+* run bin/run.rb
+
+
+
+
+
+
+
+
+
+
+
+Created as a final project in Flatiron School Software Engineering Immersive, mod 1. The guidelines for the projects were:
+
 # Module One Project 
 
 Congratulations, you're at the end of module one! You've worked crazy hard to get here and have learned a ton.
