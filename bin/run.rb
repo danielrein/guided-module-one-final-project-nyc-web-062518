@@ -120,7 +120,7 @@ def run
     puts ''
     date = get_date
     
-    # find and desplay matching restaurants and events
+    # find and display matching restaurants and events
     puts ''
     restaurants_array = find_matching_restaurants(zipcode)
     show_matching_restaurants(restaurants_array)
@@ -129,7 +129,7 @@ def run
     matching_events = find_matching_events(zipcode ,date)
     show_matching_events(matching_events)
 
-    #get event/restaurant selection
+    #get event/restaurant selection, create program and save to db
     puts ''
     event = get_event_selection
     restaurant_name = get_restaurant_selection
