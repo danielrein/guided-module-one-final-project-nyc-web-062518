@@ -196,6 +196,7 @@ def run # NEEDS MASSIVE, MASSIVE REFACTORING!!!!!!!!!!!!!!!!!!!!!!!
     while keep_going == true
       pick_or_shuffle = p_or_s?("\n\nEnter 'P' to pick restaurant & event, or 'S' to shuffle.")
       if pick_or_shuffle == "p"
+        
       # user's selection: get event/restaurant selection, create program and save to db
         puts ''
         event = get_event_selection
