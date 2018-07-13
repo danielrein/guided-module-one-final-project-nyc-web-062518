@@ -6,7 +6,6 @@ developers: Maneepailin Sriuthenchai & Daniel Rein
 
 demo video: https://www.youtube.com/watch?v=-xxSwFGa84Q&feature=youtu.be
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/-xxSwFGa84Q" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ### installation
 * clone this folder
