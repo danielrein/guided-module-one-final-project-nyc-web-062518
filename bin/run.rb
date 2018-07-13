@@ -140,7 +140,6 @@ def run
     # display user's programs
     show_user_programs(current_user)
     puts "\n\n\n"
-    
 end
 
 run
