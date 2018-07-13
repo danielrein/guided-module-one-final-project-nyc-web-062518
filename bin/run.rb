@@ -166,7 +166,7 @@ end
 
 
 
-def run
+def run # NEEDS MASSIVE, MASSIVE REFACTORING!!!!!!!!!!!!!!!!!!!!!!!
 
     # welcome, create/find user, get zipcode, get date
     welcome
